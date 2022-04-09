@@ -9,13 +9,11 @@ jobs:
           password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
-      - run:
-          name: "Docker login"
-          command: cd travis_ci | docker login --username $DOCKERHUB_USER -- password $DOCKERHUB_PASSWORD
+      - setup_remote_docker
 
       - run:
           name: "Build docker image"
-          command: docker build -t saegeroliver/simple-node:latest .
+          command: cd trvis_ci | docker build -t saegeroliver/simple-node:latest .
 
       - run:
           name: "Push docker image to hub"
