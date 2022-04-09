@@ -3,14 +3,25 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: simple-node
+      - image: cimg/base:current
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
+      - run:
+          name: "Docker login"
+          command: cd travis_ci | docker login --username $DOCKERHUB_USER -- password $DOCKERHUB_PASSWORD
+
+      - run:
+          name: "Build docker image"
+          command: docker build -t saegeroliver/simple-node:latest .
+
+      - run:
+          name: "Push docker image to hub"
+          command: docker push saegeroliver/simple-node:latest
 
 workflows:
-  build:
+  build-and-deploy:
     jobs:
       - build
