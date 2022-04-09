@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: simple-node
         auth:
-          username: saegeroliver
+          username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
