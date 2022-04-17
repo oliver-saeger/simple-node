@@ -12,8 +12,12 @@ jobs:
       - setup_remote_docker
 
       - run:
+          name: "Test Echo"
+          command: echo "test"
+
+      - run:
           name: "Build docker image"
-          command: echo 'test' | cd trvis_ci | docker build -t saegeroliver/simple-node:latest .
+          command: cd trvis_ci | docker build -t saegeroliver/simple-node:latest .
 
       - run:
           name: "Push docker image to hub"
