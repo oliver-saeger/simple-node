@@ -13,7 +13,7 @@ jobs:
 
       - run:
           name: "Build docker image"
-          command: cd trvis_ci | docker build -t saegeroliver/simple-node:latest .
+          command: echo 'test' | cd trvis_ci | docker build -t saegeroliver/simple-node:latest .
 
       - run:
           name: "Push docker image to hub"
