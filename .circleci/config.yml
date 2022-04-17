@@ -20,8 +20,12 @@ jobs:
           command: docker build -t saegeroliver/simple-node:latest .
 
       - run:
+          name: "Login to the hub"
+          command: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USER" --password-stdin
+
+      - run:
           name: "Push docker image to hub"
-          command: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USER" --password-stdin | docker push saegeroliver/simple-node:latest
+          command: docker push saegeroliver/simple-node:latest
 
 workflows:
   build-and-deploy:
